@@ -37,6 +37,7 @@ class App {
       this.pernamentSelect = false
       this.selectedCurve = -1
     } else {
+      //
     }
 
   }
@@ -78,16 +79,12 @@ class App {
   }
 
   untilClickSelect() {
-    console.log("TAK")
-    console.log(this.pernamentSelect)
     this.pernamentSelect = true
-    console.log(this.pernamentSelect)
   }
 
   createElement(type) {
     return document.createElementNS("http://www.w3.org/2000/svg", type)
   } 
-
 
   lineFactory(A, B, dashed) {
     var elem = this.createElement('line')
@@ -107,6 +104,5 @@ class App {
   }
 
 }
-
 
 app = new App()
