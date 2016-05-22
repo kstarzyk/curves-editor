@@ -120,8 +120,6 @@ class Bezier {
     this.drawCurve()
   }
 
-
-
   setId(id) {
     this.id = id
   }
