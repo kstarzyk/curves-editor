@@ -28,7 +28,6 @@ class App {
   }
 
   onClick(e) { 
-    console.log(this._selectedCurve)
     if (e.shiftKey) {
       if (this.selectedCurve !== -1) 
         this.curves[this._selectedCurve].addPoint(new Point(e.clientX, e.clientY-this.offsetTop))
@@ -37,8 +36,8 @@ class App {
     } else if(!this.drawing) {
       this.pernamentSelect = false
       this.selectedCurve = -1
-      console.log(window.event)
     } else {
+      //
     }
 
   }
@@ -66,10 +65,6 @@ class App {
     this.curves[id].update()
   }
 
-  startCurve(e, type) {
-    
-  }
-
 
   set selectedCurve(id) {
     if (id === this._selectedCurve) {
@@ -84,16 +79,12 @@ class App {
   }
 
   untilClickSelect() {
-    console.log("TAK")
-    console.log(this.pernamentSelect)
     this.pernamentSelect = true
-    console.log(this.pernamentSelect)
   }
 
   createElement(type) {
     return document.createElementNS("http://www.w3.org/2000/svg", type)
   } 
-
 
   lineFactory(A, B, dashed) {
     var elem = this.createElement('line')
@@ -113,6 +104,5 @@ class App {
   }
 
 }
-
 
 app = new App()

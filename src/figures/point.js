@@ -17,7 +17,6 @@ class Point {
     elem.addEventListener('mousedown', e => this.select(e))
 
     elem.setAttribute('transform', 'matrix(1 0 0 1 0 0)')
-    //elem.setAttribute('fill', 'black')
     this.elem = elem
     return elem
   }
@@ -28,6 +27,10 @@ class Point {
     return elem
   }
 
+  getMatrix() {
+    return this.elem.getAttributeNS(null, 'transform').slice(7, -1).split(' ')
+  }
+
   select(e) {
     if (!app.drawing) app.drawing = true
     if (app.selectedElement.attributes.key.value === e.target.attributes.key.value) { this.deselect(e); return; }  
@@ -35,7 +38,6 @@ class Point {
     app.currentX = e.clientX
     app.currentY = e.clientY
     app.currentMatrix = app.selectedElement.getAttributeNS(null, "transform").slice(7,-1).split(' ')
-    //this.elem.addEventListener('click', e => this.deselect(e))
     for (var i=0; i < app.currentMatrix.length; i++)
       app.currentMatrix[i] = parseFloat(app.currentMatrix[i])
     this.moveA = e => this.move(e)
@@ -43,7 +45,6 @@ class Point {
   }
 
   deselect(e) {
-    console.log("DESELECTED")
     if (app.selectedElement != 0) {
       app.drawing = false
       app.finishDrawing = true
@@ -57,23 +58,8 @@ class Point {
     this.transform()
   }
 
-  transform() {
-    //console.log("matrix before transformation")
-    //console.log(this.elem)
-    var matrix = this.getMatrix()
-    // this.x += parseFloat(matrix[4])
-    // this.y += parseFloat(matrix[5])
-    this.elem.setAttributeNS(null, 'cx', this.x)  
-    this.elem.setAttributeNS(null, 'cy', this.y)
-    this.elem.setAttributeNS(null, 'transform', 'matrix(1 0 0 1 0 0)')
-  }
-
-  getMatrix() {
-    return this.elem.getAttributeNS(null, 'transform').slice(7, -1).split(' ')
-  }
 
   move(e) {
-    console.log('move')
     app.updateCurveById(this.parent_id)
     var dx = e.clientX - app.currentX
     var dy = e.clientY - app.currentY
@@ -87,17 +73,19 @@ class Point {
     app.selectedElement.setAttributeNS(null, "transform", newMatrix)
     app.currentX = e.clientX
     app.currentY = e.clientY
-
   }
 
-  static create(x, y) {
-    return new Point(x, y)
+  transform() {
+    var matrix = this.getMatrix()
+    this.elem.setAttributeNS(null, 'cx', this.x)  
+    this.elem.setAttributeNS(null, 'cy', this.y)
+    this.elem.setAttributeNS(null, 'transform', 'matrix(1 0 0 1 0 0)')
   }
+
 }
 
 
 function addPoints(a, b) {
-  // console.log('add points')
   return new Point(a.x+b.x, a.y+b.y)
 }
 

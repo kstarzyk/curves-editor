@@ -9,7 +9,7 @@ class SelectedComponent extends Component {
     this.selected = obj
     this.removeClass('no-selected')
     this.addClass('selected')
-    console.log('Selected:', obj)   
+    console.debug('Selected:', obj)   
   }
 
   dummy() {
@@ -17,9 +17,9 @@ class SelectedComponent extends Component {
       return false
     this.selected.deselect()
     this.selected = null
-    console.log('Selected: Nope')
     this.addClass('no-selected')
     this.removeClass('selected')
+    console.debug('Selected: Nope')
   }
 
 }
