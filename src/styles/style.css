@@ -1,0 +1,53 @@
+#header {
+  border-bottom: 1px solid gray;
+  display: flex;
+  height: 60px
+}
+
+h1 {
+  margin: 10px !important
+}
+
+nav {
+  align-items: center;
+  display: inline-flex !important;
+  height: 100% !important;
+  width: 100% !important
+}
+
+#menu {
+  display: flex
+}
+
+#selected-info.no-selected {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100% !important;
+  width: 100% !important
+}
+
+#selected-info.no-selected > .selected-curve {
+  display: none
+}
+
+#selected-info.selected > .no-selection {
+  display: none
+}
+
+.draggable {
+  cursor: pointer
+}
+
+.hidden {
+  display: none
+}
+
+.divider {
+  width: 10px
+}
+
+.divider.small {
+  width: 5px
+}
+

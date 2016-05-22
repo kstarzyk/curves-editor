@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>PACE - Bezier, B-spline curves online tool</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/style.css">
+  </head>
+  <body>
+    <div id="header"> 
+      <h1>PACE</h1>
+      <nav>
+        <div id="menu">
+        </div>
+        <select>
+          <option value="bezier">Bezier</option>
+          <option value="b-spline">B-Spline</option>
+        </select>
+        <span class="divider small"></span>
+        <button type="button" class="btn btn-default" aria-label="Add Curve">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"</span>
+        </button>
+        <div id="selected-info" class="no-selected">
+          <span class="no-selection">&lt; no curve selected &gt;</span>
+          <div class="selected-curve bezier">
+            <span name="name"></span>
+            <span name="degree"></span>
+            <span name="points"></span>
+          </div>
+        </div>   
+       </nav>
+    </div>
+    <svg id="canvas" width="1000" height="500"></svg>
+    <script src="src/put.js"></script>
+    <script src="src/component.js"></script>
+    <script src="src/menu.js"></script>
+    <script src="src/selected.js"></script>
+    <script src="src/point.js"></script>
+    <script src="src/canvas.js"></script>
+    <script src="src/bezier.js"></script>
+    <script src="src/algorithms.js"></script>
+    <script src="src/index.js"></script>
+  </body>
+</html>
