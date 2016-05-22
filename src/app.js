@@ -28,7 +28,6 @@ class App {
   }
 
   onClick(e) { 
-    console.log(this._selectedCurve)
     if (e.shiftKey) {
       if (this.selectedCurve !== -1) 
         this.curves[this._selectedCurve].addPoint(new Point(e.clientX, e.clientY-this.offsetTop))
@@ -37,7 +36,6 @@ class App {
     } else if(!this.drawing) {
       this.pernamentSelect = false
       this.selectedCurve = -1
-      console.log(window.event)
     } else {
     }
 
@@ -64,10 +62,6 @@ class App {
 
   updateCurveById(id) {
     this.curves[id].update()
-  }
-
-  startCurve(e, type) {
-    
   }
 
 
