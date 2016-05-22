@@ -1,1 +1,1 @@
-# PACE: Planes And Curves Editor
+# PACE: Planes And Curves Editor [dev]
