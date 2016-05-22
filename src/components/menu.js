@@ -17,9 +17,8 @@ class Menu extends Component {
   renderButton(name) {
     return `  
       <button id="button-${name}" type="button" class="btn btn-default" aria-label="Add Curve">
-            <span class="glyphicon glyphicon-${name}" aria-hidden="true"</span>
-          </button>
-    `
+        <span class="glyphicon glyphicon-${name}" aria-hidden="true"</span>
+      </button>`
   }
 
   renderDivider() {
