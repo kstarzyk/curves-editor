@@ -1,6 +1,5 @@
 class Bezier {
   constructor(start, end, cpoints, id) {
-    // this.n = n || !!cpoints.length ? 1 + cpoints.length : 1
     this.n = cpoints.length + 1
     this.start = start
     this.end = end
@@ -14,18 +13,28 @@ class Bezier {
     this.selected = false
     this.updating = false
   }
-
-  addControlPoint() {
-
-
+  
+  addPoint(p) {
+    this.points.push(p)
+    this.end = this.points[this.points.length-1]
+    this._incDeg()
+    this.update()
   }
 
-  drawPoints() {
-    this.pointsView.appendChild(this.start.draw(this.id, 0))
-    for (var i = 1; i < this.points.length - 1; i++) {
-      this.pointsView.appendChild(this.points[i].drawControl(this.id, i))
-    }
-    this.pointsView.appendChild(this.end.draw(this.id, this.points.length-1))
+  clear() {
+    clearNode(this.view)
+  }
+
+  clearCurve() {
+    clearNode(this.lines)
+  }
+  
+  clearDashed() {
+    clearNode(this.dashedLines)
+  }
+
+  clearPoints() {
+    clearNode(this.pointsView)
   }
 
   drawCurve() {
@@ -40,62 +49,42 @@ class Bezier {
       prev = next
     } 
   }
-
-  clearCurve() {
-    clearNode(this.lines)
+  
+  drawDashed() {
+    for (var i = 0; i < this.points.length-1; i++) {
+      this.dashedLines.appendChild(app.lineFactory(this.points[i], this.points[i+1], true))
+    }
   }
-
-  clearPoints() {
-    clearNode(this.pointsView)
+  
+  drawPoints() {
+    this.pointsView.appendChild(this.start.draw(this.id, 0))
+    for (var i = 1; i < this.points.length - 1; i++) {
+      this.pointsView.appendChild(this.points[i].drawControl(this.id, i))
+    }
+    this.pointsView.appendChild(this.end.draw(this.id, this.points.length-1))
   }
-
-  clear() {
-    clearNode(this.view)
-  }
-
+  
   draw(_update) {
     var update = _update || false
-    if (update) {
+    if (update) 
       this.clear()
-    }
 
     if (this.selected) {
       this.drawPoints()
       this.drawDashed()
     }
+    
     this.drawCurve()
     this.view.appendChild(this.lines)
     this.view.appendChild(this.pointsView)
     this.view.appendChild(this.dashedLines)
     app.append(this.view)
   }
-
-  clearDashed() {
-    clearNode(this.dashedLines)
-  }
-
-  update() {
-    this.clearPoints()
-    this.clearCurve()
-    this.clearDashed()
-
-    if (this.selected) {
-      this.drawPoints()
-      this.drawDashed()
-    }
-    this.drawCurve()
-  }
-
-  drawDashed() {
-    for (var i = 0; i < this.points.length-1; i++) {
-      this.dashedLines.appendChild(app.lineFactory(this.points[i], this.points[i+1], true))
-    }
-  }
-
+  
   select() {
-    if (app.pernamentSelect || this.selected) {
+    if (app.pernamentSelect || this.selected) 
       return false
-    }
+    
     this.selected = true
     app.selectedCurve = this.id
     this.drawDashed()
@@ -109,30 +98,29 @@ class Bezier {
   }
 
   deselect() {
-    if (app.pernamentSelect || app.drawing) {
+    if (app.pernamentSelect || app.drawing) 
       return false
-    }
-
+    
     this.selected = false
     app.selectedCurve = -1
     this.clearPoints()
     this.clearDashed()
   }
+  
+  update() {
+    this.clearPoints()
+    this.clearCurve()
+    this.clearDashed()
 
-  get info() {
-    return {
-      deg: this.n,
-      points: this.points,
-      name: this.name
+    if (this.selected) {
+      this.drawPoints()
+      this.drawDashed()
     }
+    
+    this.drawCurve()
   }
 
-  addPoint(p) {
-    this.points.push(p)
-    this.end = this.points[this.points.length-1]
-    this._incDeg()
-    this.update()
-  }
+
 
   setId(id) {
     this.id = id
@@ -140,6 +128,10 @@ class Bezier {
 
   _incDeg() {
     this.n += 1
+  }
+  
+  _decDeg() {
+    this.n -= 1
   }
 
 }
