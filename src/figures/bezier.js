@@ -25,6 +25,18 @@ class Bezier {
     clearNode(this.view)
   }
 
+  _animateLine(i, t, color) {
+    setTimeout(() => {
+      this.lines.childNodes[i].style.stroke = color
+    }, t)
+  }
+  animate() {
+    for (var i=0; i < this.lines.childNodes.length; i++) {
+      this._animateLine(i,  400 + (i/100) * 1000, "red")
+      this._animateLine(i,  1200 + (i/100) * 1000, "black")
+    }
+  }
+
   clearCurve() {
     clearNode(this.lines)
   }

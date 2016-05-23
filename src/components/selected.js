@@ -3,6 +3,40 @@ class SelectedComponent extends Component {
     super('#selected-info')
     this.id = -1
     this.selected = null
+    this.elem.addEventListener('click', this, false)
+  }
+
+  status() {
+  
+  }
+
+  onClick(e) {
+    switch (e.target.id.slice(7)) {
+      case 'animate':
+        this.handleAnimate()
+        break
+      case 'move':
+        this.handleMove()
+        break
+      default:
+        console.warn(`Action is not defined: ${e.target.id.slice(7)}`)
+    }
+  }
+
+  handleEvent(e) {
+    switch (e.type) {
+      case 'click':
+        this.onClick(e)
+        break
+    }
+  }
+
+  handleAnimate() {
+    this.selected.animate()
+  }
+
+  handleMove() {
+    app.canvas.style.cursor = 'pointer'
   }
 
   display(obj) {
